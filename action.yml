@@ -1,0 +1,31 @@
+name: 'BentoDB Create Database'
+description: 'Create a database for use in your GitHub action instantly'
+branding:
+  icon: 'arrow-up-circle'
+  color: 'green'
+inputs:
+  api-token:
+    description: 'Your BentoDB API token'
+    required: true
+  database-name:
+    description: 'The name of your database. If you are working on the context of a PR or branch, specify a consistent reference to make sure the same database is re-used. If you do not provide a name, a random name will be generated.'
+    required: false
+outputs:
+  database_id:
+    description: 'A unique ID for the database'
+  database_name:
+    description: 'The name of the database'
+  database_host:
+    description: 'The hostname you need to connect to'
+  database_port:
+    description: 'The port you need to connect to'
+  database_username:
+    description: 'The username you need to connect as'
+  database_password:
+    description: 'The password you need too use'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.api-token }}
+    - ${{ inputs.database-name }}
