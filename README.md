@@ -1,6 +1,6 @@
 # BentoDB - Create Database
 
-A GitHub action to create a database using [BentoDB](https://bentodb.com).
+A GitHub action to create a database using [BentoDB](https://www.bentodb.com).
 
 ### Example usage
 1. Create a database using the repository and branch as the name.
