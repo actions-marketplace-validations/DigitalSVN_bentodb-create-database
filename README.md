@@ -42,6 +42,16 @@ jobs:
 
 ```
 
+### Outputs
+| Key               | Example                          | Description                  |
+|-------------------|----------------------------------|------------------------------|
+| database_id       | 12345                            | A unique ID for the database |
+| database_name     | my_database_name                 | Name of the database         |
+| database_host     | example-mysql-region.bentodb.com | Hostname of the database     |
+| database_port     | 3306                             | Port number of the database  |
+| database_username | dbu_username                     | Database username            |
+| database_password | dbp_password                     | Database password            |
+
 ### Pre-requisites
 You will need a BentoDB API token. These are available for FREE at https://www.bentodb.com
 
