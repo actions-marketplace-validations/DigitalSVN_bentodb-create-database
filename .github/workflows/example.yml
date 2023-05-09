@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Create BentoDB database
         id: create
-        uses: DigitalSVN/bentodb-create-database@feature-php-test-script
+        uses: DigitalSVN/bentodb-create-database@main
         with:
           api-token: ${{ secrets.BENTODB_API_TOKEN }}
           database-name: "${{ github.repository }}/${{ github.head_ref }}"
