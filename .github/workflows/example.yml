@@ -11,22 +11,32 @@ jobs:
     name: Create and then delete a database using BentoDB
     steps:
       - uses: actions/checkout@v3
-      - name: Create
+      - name: Create BentoDB database
         id: create
-        uses: DigitalSVN/bentodb-create-database@main
+        uses: DigitalSVN/bentodb-create-database@feature-php-test-script
         with:
           api-token: ${{ secrets.BENTODB_API_TOKEN }}
           database-name: "${{ github.repository }}/${{ github.head_ref }}"
 
       - name: Output the database name
         run: echo "Database name - ${{ steps.create.outputs.database_name }}, ID - ${{ steps.create.outputs.database_id }}"
-        
-      - name: Delete
+
+      - name: Run MySQL test script
+        run: |
+          php ./.github/workflows/test.php
+        env:
+          DB_HOST: ${{ steps.create.outputs.database_host }}
+          DB_PORT: ${{ steps.create.outputs.database_port }}
+          DB_NAME: ${{ steps.create.outputs.database_name }}
+          DB_USERNAME: ${{ steps.create.outputs.database_username }}
+          DB_PASSWORD: ${{ steps.create.outputs.database_password }}
+
+      - name: Delete BentoDB database
         id: delete
         uses: DigitalSVN/bentodb-delete-database@main
         with:
           api-token: ${{ secrets.BENTODB_API_TOKEN }}
           database-id: ${{ steps.create.outputs.database_id }}
-          
+
       - name: Confirm deleted database name
         run: echo "Database name - ${{ steps.delete.outputs.database_name }}, ID - ${{ steps.delete.outputs.database_id }}"
